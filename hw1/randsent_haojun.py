@@ -94,7 +94,6 @@ class Grammar:
         # Parse the input grammar file
         self.rules = None
         self._load_rules_from_file(grammar_file)
-        print(self.rules)
 
     def _load_rules_from_file(self, grammar_file):
         """
@@ -171,7 +170,6 @@ class Grammar:
             
         expand(0, max_expansions, start_symbol)
         return ans
-
 
 ####################
 ### Main Program
