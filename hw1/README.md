@@ -74,13 +74,13 @@ Question 3:
 
 2.1 
 Question 1
-The mainly responsible grammar rule for long sentences is NP NP PP. As this grammar rule make recursive definition of NP: if this rule is choose for new NP in previous NP, the pattern will repeat util finally the other rule of NP (NP, Det, Noun) is chosen at some part. Also, as the only rule for PP is Prep and NP, it will generate another NP in the sequence, also facing the previous situation. This is likely to cause the sentence to be very long, as NP pattern can extend unlimitedly.
+The mainly responsible grammar rule for long sentences is NP -- NP PP. As this grammar rule make recursive definition of NP: if this rule is choose for new NP in previous NP, the pattern will repeat util finally the other rule of NP (NP, Det, Noun) is chosen at some part. Also, as the only rule for PP is Prep and NP, it will generate another NP in the sequence. As a result, the average expactation of NPs in the expansion of a NP is (2+0)/2 = 1, meaning whenever an NP is expanded, it is expected to generate another NP in its expanded sequence. This is likely to cause the sentence to be very long, as NP pattern can extend unlimitedly.
 
 Question 2
-For Noun, the possible rules in current grammar are (adj, Noun), and each noun words (total 5). The chance of choosing adj and Noun rule is only 1/6, and having consecutive adjectives means choosing two adj & Noun rule consecutively. The chance is only 1/36.
+For Noun, the possible rules in current grammar are: (Noun -- adj, Noun) and (Noun -- [terminator]), where there are five possible choices of terminator. Since the weight for any of the terminators is the same as the weight for (Noun -- adj, Noun), the chance of adding an adj before the noun at any noun expansion step is only 1/6, and having consecutive adjectives, , as in example "the fine perplexed pickle", means choosing two adj & Noun rule consecutively. The chance is only 1/36. 
 
 Question 3
-Should make the weight for NP NP PP rule smaller, and the weight for Noun Adj Noun rule larger
+To fixed item 1 we should make the weight for NP NP PP rule smaller, so that the expectation for another NP in the expansion of a NP is smaller; to fix item 2 we should make the weight for (Noun -- Adj Noun) rule larger to make it more likely to yield consecutive adjectives.
 
 Question 4
 Not yet solved
