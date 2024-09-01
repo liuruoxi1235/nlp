@@ -615,14 +615,14 @@ For the sentence, there are two possible parsing having equal probability. There
 
 (c) In the corpus, the probabilities of the two sentence appearing are both 0.5. In the grammar model of language, the probability of producing the first sentence is 5.144e-05, and the probability of producing the second sentence is 1.240e-09. -log(P) of the two sentences are 14.2467 and 29.587, which sum up to 43.8337, which is just log prob in the equation. Dividing by word number (18) yields the cross entropy 2.435.
 
-(d) The perplexity is just exponentiating the cross entropy, which is e^2.435 = 11.4158
+(d) The perplexity is just exponentiating the cross entropy, which is 2^2.435 = 5.40764333
 
-(e) The cross entropy here is infinity: as the second setence have a VP with only a verb but not NP, it's not a sentence that can be produced using grammar.gr. The probability of producing that sentence with grammar model is 0, indicating that the log probability is negative infinity. When summing negative log probability, the result is also infinity and produce an infinite cross-entropy
+(e) The cross-entropy here is infinity: as the second sentence has a VP with only a verb but not NP, it's not a sentence that can be produced using grammar.gr. The probability of producing that sentence with the grammar model is 0, indicating that the log probability is negative infinity. When summing negative log probability, the result is also infinity and produces an infinite cross-entropy
 
 Question 6:
 (a) command used: python3 randset.py -n 200 -g grammar2.gr | ./parse -P -g grammar2.gr
-The entropy of grammar2 is 2.002 bits per words (4575.336 / 2285)
-(b) The entropy of grammar3 is 2.300 bits per words (6761.001 / 2940). Grammar3 has higher entropy than grammar2. This is natural as grammar3 is designed to incorporate more diverse sentence forms and incoporate more word types and choices. Generally, longer sentences can have lower probability (as the product of the partition is the sum of more probabilities at each step of choosing rules). For grammar3 it can have longer sentences due to variety in gramamr rules and sentence forms. All these factors contribute to higher entropy for grammar3 than grammar2.
+The entropy of grammar2 is 2.002 bits per word (4575.336 / 2285)
+(b) The entropy of grammar 3 is 2.300 bits per word (6761.001 / 2940). Grammar 3 has higher entropy than grammar 2. This is natural as grammar3 is designed to incorporate more diverse sentence forms and incorporate more word types and choices. Generally, longer sentences can have a lower probability (as the product of the partition is the sum of more probabilities at each step of choosing rules). For grammar3 it can have longer sentences due to variety in grammar rules and sentence forms. All these factors contribute to higher entropy for grammar3 than grammar2.
 (c) The resulting entropy is infinity. Observation shows that some sentence in the generating process has ... with default max expansion settings (450). We have tried increasing that threshold to 1000, while still having ... in produced sentence. Since the grammar.gr is designed in a way that allows excessively long sentences, the appearance of ... is unavoidable unless having arbitrarily large max expansions. As ... is not part of the grammar, all sentences with that will have probability 0 in the model and thus have infinite log probabilities, making cross entropy also infinity.
 
 Question 7
