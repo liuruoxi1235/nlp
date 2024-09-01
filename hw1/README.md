@@ -663,13 +663,14 @@ The NP that should be proceed by a and an should have a separate type. We name t
 1  Adj_an_P Adj_an Adj_an_r
 1  Adj_an_P Adj_an
 
-1  Adj_an_r Adj_an
-1  Adj_an_r Adv Adj_an
+1  Adj_a Adv Adj
 
-For adding adverb before a adjective that should proceed with an, we need to be careful as adding adverb at the front will change the an at the front to an. To change this, we make sure that Adj_an_P either have only a single an-adjective or begin with an an-adjective and other adverb-adjective combinations (adj_an_r can have a single an-adjective or proceed by any amound of adverb). This is to ensure that the first adjective of a adjective sequence proceed by an is an an-adjective without adverb.
+1  Adj_an_r Adj_an
+0.5  Adj_an_r Adv Adj_an
+
+For adding adverb before a adjective that should proceed with an, we need to be careful as adding adverb at the front will change the an at the front to an. To change this, we make sure that Adj_an_P either have only a single an-adjective or begin with an an-adjective and other adverb-adjective combinations (adj_an_r can have a single an-adjective or proceed by any amound of adverb). This is to ensure that the first adjective of a adjective sequence proceed by an is an an-adjective without adverb. Adverb followed by any adjectives should be considered a an a-adjective
 
 0.5 Det_Phrase Det Noun_P
-0.5 Det_Phrase A Adv Adj Noun_P
 0.5 Det_Phrase A A_Noun_P
 0.5 Det_Phrase An An_Noun_P
 1  Adj Adj_a
@@ -677,4 +678,4 @@ For adding adverb before a adjective that should proceed with an, we need to be 
 
 1	NP	Det_Phrase(modified from 1 NP Det Noun)
 
-We change the original Det Noun combination to a Det_Phrase to handle all the phrase start by article. For normal article, they can have any noun afterward. a can only get followed by A_Noun_P, An can only get followed by An_Noun_P. A special case here is adverb, as adverb should always have a. Therefore, adverb followed by and adjective will also have A at the beginning. 
+We change the original Det Noun combination to a Det_Phrase to handle all the phrase start by article. For normal article, they can have any noun afterward. a can only get followed by A_Noun_P, An can only get followed by An_Noun_P.  

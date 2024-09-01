@@ -57,7 +57,6 @@
 0.5   An_Noun_P Adj_an_P Noun_P
 
 0.5 Det_Phrase Det Noun_P
-0.5 Det_Phrase A Adv Adj Noun_P
 0.5 Det_Phrase A A_Noun_P
 0.5 Det_Phrase An An_Noun_P
 
@@ -110,7 +109,7 @@
 1  Adj Adj_a
 1  Adj Adj_an
 
-1  Adj_a Adv Adj_a
+1  Adj_a Adv Adj
 
 1  Adj_an_P Adj_an Adj_an_r
 1  Adj_an_P Adj_an
