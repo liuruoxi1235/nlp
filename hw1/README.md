@@ -83,28 +83,29 @@ Question 3
 To fixed item 1 we should make the weight for NP NP PP rule smaller, so that the expectation for another NP in the expansion of a NP is smaller; to fix item 2 we should make the weight for (Noun -- Adj Noun) rule larger to make it more likely to yield consecutive adjectives.
 
 Question 4
-Not yet solved
+First, it is obviously more common for people to use periods to end setences than to use exclamation marks or "Is it true that ... ?" structure. The exact percentage for these three sentence types depends on the context, but in general period-ended sentences make up 70-90% of English sentences while exclamation-mark-ended sentence only around 5%. So we give (ROOT -- S .) a weight of 70, (ROOT -- S !) a weight of 5, and (ROOT	-- is it true that S ?) only 0.5 since it is apparently rarer to appear. Also, "the" and "a" are more commmon determiners than "every", but "every" certainly appear on a regular basis in English, so we gave "the" and "a" each a weight of 5 and "every" a weight of "1". The same is done with prepositions, where we gave a smaller weight to "under" than "with", "on", and "in". 
 
 Question 5
-a sandwich ate the delicious president ! 
 
-a fine delicious pickle pickled the floor . 
+the fine perplexed chief of staff wanted the pickle . 
 
-every sandwich understood the chief of staff .
+the pickled pickle ate a pickle in the perplexed chief of staff ! 
 
-a chief of staff with every perplexed floor with the sandwich wanted the perplexed floor .
+every pickle wanted a chief of staff . 
 
-a chief of staff pickled a delicious sandwich !
+the pickled perplexed perplexed chief of staff in every president ate the pickled perplexed pickled perplexed fine sandwich . 
 
-every fine pickled sandwich ate a pickle under a perplexed president in the floor !
+a sandwich ate the pickled sandwich . 
 
-the pickle ate a floor under every chief of staff .
+a pickled chief of staff understood a president . 
 
-the delicious president on every floor in a pickle on a delicious pickle ate every pickle .
+the chief of staff kissed a chief of staff in the pickled president . 
 
-the pickled delicious pickled floor kissed a sandwich .
+the sandwich kissed a floor . 
 
-the pickled pickled chief of staff ate the floor .
+is it true that a floor understood the pickle ? 
+
+the perplexed pickle kissed a sandwich on a floor on the pickled fine sandwich with the pickle . 
 
 2.3
 Question 9:
