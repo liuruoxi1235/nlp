@@ -31,16 +31,25 @@
 #    Det = determiner (sometimes called "article")
 #    Prep = preposition
 #    Adj = adjective
+#   Wh = interrogative words
+#   AUV = auxiliary verbs
+#   WHVerb = verb used in Wh questions
 
 1	S	NP VP
 1   S   NP Verb_sentence SS
 1   S   it AV NP SS
 1   S   SS AV NP
+1   S   Wh AUV Whs
+1   S   Wh AUV Whs that NP Verb
+1   S   Wh AUV Whs NP Prep
+1   S   Wh Verb NP
 1   SS  that NP VP
 1	VP	Verb NP
 1   VP  IVP #3
 1   IVP Intrans
 1   IVP Intrans PP
+1   Whs NP WHVerb
+1   Whs NP Verb NP
 1	NP	Det_Phrase
 0.2 NP  Name
 0.2	NP	NP PP
@@ -51,15 +60,12 @@
 1   Noun_P An_Noun_P
 
 1   A_Noun_P Noun
-0.5   A_Noun_P Adj Noun_P
+0.5   A_Noun_P Adj_a Noun_P
 
 1   An_Noun_P Noun_an
-0.5   An_Noun_P Adj_an An_Noun_P
+0.5   An_Noun_P Adj_an_P Noun_P
 
-0.5 Det_Phrase Det Noun
-0.5 Det_Phrase Det Noun_an
-0.5 Det_Phrase A Adv Adj Noun_P
-0.5 Det_Phrase A Adv Adj_an Noun_P 
+0.5 Det_Phrase Det Noun_P
 0.5 Det_Phrase A A_Noun_P
 0.5 Det_Phrase An An_Noun_P
 
@@ -76,6 +82,13 @@
 1	Verb	kissed
 1	Verb	understood
 1	Verb	pickled
+
+1   WHVerb  think
+1   WHVerb  eat
+1   Wh what
+1   Wh who
+1   Wh where
+1   AUV did
 
 1   Verb_sentence    thought
 
@@ -109,13 +122,21 @@
 
 1  Adv very
 
-1  Adj Adv Adj
-1  Adj_an Adv Adj_an 
+1  Adj Adj_a
+1  Adj Adj_an
 
-1	Adj	fine
-1	Adj	delicious
-1	Adj	perplexed
-1	Adj	pickled
+1  Adj_a Adv Adj
+
+1  Adj_an_P Adj_an Adj_an_r
+1  Adj_an_P Adj_an
+
+1  Adj_an_r Adj_an
+1  Adj_an_r Adv Adj_an
+
+1	Adj_a	fine
+1	Adj_a	delicious
+1	Adj_a	perplexed
+1	Adj_a	pickled
 
 1   Adj_an ambivalent
 1   Adj_an excellent
