@@ -33,7 +33,7 @@
 #    Adj = adjective
 
 1	S	NP VP
-1   S   NP Verb SS #4
+1   S   NP Verb_sentence SS #4
 1   S   it AV NP SS #5
 1   S   SS AV NP #6
 1   SS  that NP VP
@@ -61,7 +61,8 @@
 1	Verb	kissed
 1	Verb	understood
 1	Verb	pickled
-1   Verb    thought
+
+1   Verb_sentence    thought
 
 1   Intrans sighed
 1   Intrans worked
@@ -83,6 +84,8 @@
 1	Noun	pickle
 1	Noun	chief of staff
 1	Noun	floor
+1   Noun    proposal
+1   Noun    desk
 
 1   Adj Adv Adj
 1	Adj	fine

@@ -193,7 +193,6 @@ def main():
         # Print the sentence with the specified format.
         # If it's a tree, we'll pipe the output through the prettyprint script.
         if args.tree:
-            print(sentence)
             prettyprint_path = os.path.join(os.getcwd(), 'prettyprint')
             t = os.system(f"echo '{sentence}' | perl {prettyprint_path}")
         else:
