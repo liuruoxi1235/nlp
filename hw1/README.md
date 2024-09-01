@@ -109,47 +109,50 @@ the perplexed pickle kissed a sandwich on a floor on the pickled fine sandwich w
 
 2.3
 Question 9:
-Modifications:
+Modifications: We made several modifications to handle the grammatical phenomena in this question. First, we distinguish between names and other nouns, since all nouns except names require a determiner before them. Second, 
+We distinguish between intransitive and transitive verbs, since only the latter verbs require nouns after them. We
+also defined specific sentence rules to allow sentences that have sub-sentences in them using 'that'. As explained in detail below, this involves several sentence structures and defintions of special verbs -- sentence verbs (such as 'thought') that leads sub-sentences, and causative verbs that describe the result of the subsentence. This distinction is also necessary, because it generally doesn't make sense to use normal verbs at these positions (for instance, 'it SAW the president that a pencil lies on the ground" or 'the president ATE that a pencil lies on the ground'.) Here are discussions of each sentence in questions 2.2 and how our grammar addresses it:
+
 sentence 1: 
-NP Name
-Name Sally
+NP -- Name
+Name -- Sally
 This is to ensure that NP can be formed with either an normal Noun with an article or just a name (article is not needed). As name is a special kind of noun, a different category need to be established.
 
 sentence 2:
-Verb  Verb Con Verb
-NP    NP   Con NP 
-Con   and
+Verb -- Verb Con Verb
+NP -- NP Con NP 
+Con -- and
 This is to make that NP can be formed with two NP combining together with "and" and two transitive verbs can be combined together to be the verb for the whole sentence
 
 sentence 3:
-VP IVP
-IVP Intrans
-Intrans sighed
-Intrans worked
-We created IVP to represent to phrase begin with an intransitive verb. In the case of sentence 3, the IVP is only consist of an intransitive verb.
+VP -- IVP
+IVP -- Intrans-verb
+Intrans-verb -- sighed
+Intrans-verb -- worked
+We created IVP to represent phrases begining with an intransitive verb. In the case of sentence 3, the IVP is only consist of an intransitive verb.
 
 sentence 4:
-S  NP Verb_sentece SS
-Verb_sentence thought
-SS that NP VP
-We created a type called SS (stands for sub sentence that is consist of that, NP and VP). In this case, the whole sentence will serve as a Noun in the sentence. For sentences like sentence 4, a transitive verb is needed and followed by a sub sentence. However, the verb here is different from normal transitive verb: for verbs like thought, its unreasonable to have "I thought Sally", but reasonable for "I thought that (a sentence)". This kind of verb can only get followed by a sentence, and we decide to have a different type of verb for that.
+S -- NP Verb_sentece SS
+Verb_sentence -- thought
+SS -- that NP VP
+We created a type called SS (stands for sub-sentence that is consist of that, NP and VP). In this case, the whole sentence will serve as a Noun in the sentence. For sentences like sentence 4, a transitive verb is needed and followed by a sub sentence. However, the verb here is different from normal transitive verb: for verbs like thought, its unreasonable to have "I thought Sally", but reasonable for "I thought that (a sentence)". This kind of verb can only get followed by a sentence, and we decide to have a different type of verb for that.
 
 sentence 5:
-S it AV NP SS
-AV perplexed
-For sentences like sentence 5, we found that the verb is a different type: it is a adjective but act as a verb in the sentence (it perplexed Michael = it makes Michael perplexed). This type of verb is special and need a distinctive type. Then, the sentence is consist of it, AV, NP and a substance.
+S -- it CV NP SS
+CV perplexed
+For sentences like sentence 5, we found that the verb is a different type: it is a adjective but act as a verb in the sentence (it perplexed Michael = it makes Michael perplexed), describing a causal effect of the sub-sentence. This type of verb is special and need a distinctive type. Then, the sentence is consist of it, CV, NP and a substance.
 
 sentence 6:
-S SS AV NP
+S -- SS CV NP
 Sentences like sentence 6 are similar to sentence 5 but just different in the order of the components: for sentence 6 it put the sub sentence at the beginning and does not need "it" at the beginning.
 
 sentence 7:
-Adj Adv Adj
-Adv very
+Adj -- Adv Adj
+Adv -- very
 Sentences like sentence 7 introduce adverb that can be used to describe adjective. This type of word need a different category and Ajd can be formed with an ad verb and an adj
 
 sentence 8
-IVP Intrans PP
+IVP -- Intrans-verb PP
 Even though intransitive verb cannot be followed by a noun, it can be followed by a proposition (for instance, sighed in the room). Sentences like sentence 8 just show this pattern: a phrase start with intransitive verb can be consist of an intransitive verb and a proposition phrase.
 
 Question 10:
