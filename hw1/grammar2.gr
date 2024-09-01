@@ -19,9 +19,9 @@
 
 # Rules for creating full sentences.
 
-1	ROOT	S .
-1	ROOT	S !
-1	ROOT	is it true that S ?     # mixing terminals and nonterminals is ok.
+70	ROOT	S .
+5	ROOT	S !
+0.5	ROOT	is it true that S ?     # mixing terminals and nonterminals is ok.
 
 # The basic grammar rules.  Here's what the abbreviations stand for:
 #    S  = sentence
@@ -54,8 +54,8 @@
 
 1   Adv very
 
-1	Det	the
-1	Det	a
+5	Det	the
+5	Det	a
 1	Det	every
 
 1	Noun	president
@@ -71,5 +71,5 @@
 
 1	Prep	with
 1	Prep	on
-1	Prep	under
+0.2	Prep	under
 1	Prep	in

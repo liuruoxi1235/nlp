@@ -74,37 +74,38 @@ Question 3:
 
 2.1 
 Question 1
-The mainly responsible grammar rule for long sentences is NP NP PP. As this grammar rule make recursive definition of NP: if this rule is choose for new NP in previous NP, the pattern will repeat util finally the other rule of NP (NP, Det, Noun) is chosen at some part. Also, as the only rule for PP is Prep and NP, it will generate another NP in the sequence, also facing the previous situation. This is likely to cause the sentence to be very long, as NP pattern can extend unlimitedly.
+The mainly responsible grammar rule for long sentences is NP -- NP PP. As this grammar rule make recursive definition of NP: if this rule is choose for new NP in previous NP, the pattern will repeat util finally the other rule of NP (NP, Det, Noun) is chosen at some part. Also, as the only rule for PP is Prep and NP, it will generate another NP in the sequence. As a result, the average expactation of NPs in the expansion of a NP is (2+0)/2 = 1, meaning whenever an NP is expanded, it is expected to generate another NP in its expanded sequence. This is likely to cause the sentence to be very long, as NP pattern can extend unlimitedly.
 
 Question 2
-For Noun, the possible rules in current grammar are (adj, Noun), and each noun words (total 5). The chance of choosing adj and Noun rule is only 1/6, and having consecutive adjectives means choosing two adj & Noun rule consecutively. The chance is only 1/36.
+For Noun, the possible rules in current grammar are: (Noun -- adj, Noun) and (Noun -- [terminator]), where there are five possible choices of terminator. Since the weight for any of the terminators is the same as the weight for (Noun -- adj, Noun), the chance of adding an adj before the noun at any noun expansion step is only 1/6, and having consecutive adjectives, , as in example "the fine perplexed pickle", means choosing two adj & Noun rule consecutively. The chance is only 1/36. 
 
 Question 3
-Should make the weight for NP NP PP rule smaller, and the weight for Noun Adj Noun rule larger
+To fixed item 1 we should make the weight for NP NP PP rule smaller, so that the expectation for another NP in the expansion of a NP is smaller; to fix item 2 we should make the weight for (Noun -- Adj Noun) rule larger to make it more likely to yield consecutive adjectives.
 
 Question 4
-Not yet solved
+First, it is obviously more common for people to use periods to end setences than to use exclamation marks or "Is it true that ... ?" structure. The exact percentage for these three sentence types depends on the context, but in general period-ended sentences make up 70-90% of English sentences while exclamation-mark-ended sentence only around 5%. So we give (ROOT -- S .) a weight of 70, (ROOT -- S !) a weight of 5, and (ROOT	-- is it true that S ?) only 0.5 since it is apparently rarer to appear. Also, "the" and "a" are more commmon determiners than "every", but "every" certainly appear on a regular basis in English, so we gave "the" and "a" each a weight of 5 and "every" a weight of "1". The same is done with prepositions, where we gave a smaller weight to "under" than "with", "on", and "in". 
 
 Question 5
-a sandwich ate the delicious president ! 
 
-a fine delicious pickle pickled the floor . 
+the fine perplexed chief of staff wanted the pickle . 
 
-every sandwich understood the chief of staff .
+the pickled pickle ate a pickle in the perplexed chief of staff ! 
 
-a chief of staff with every perplexed floor with the sandwich wanted the perplexed floor .
+every pickle wanted a chief of staff . 
 
-a chief of staff pickled a delicious sandwich !
+the pickled perplexed perplexed chief of staff in every president ate the pickled perplexed pickled perplexed fine sandwich . 
 
-every fine pickled sandwich ate a pickle under a perplexed president in the floor !
+a sandwich ate the pickled sandwich . 
 
-the pickle ate a floor under every chief of staff .
+a pickled chief of staff understood a president . 
 
-the delicious president on every floor in a pickle on a delicious pickle ate every pickle .
+the chief of staff kissed a chief of staff in the pickled president . 
 
-the pickled delicious pickled floor kissed a sandwich .
+the sandwich kissed a floor . 
 
-the pickled pickled chief of staff ate the floor .
+is it true that a floor understood the pickle ? 
+
+the perplexed pickle kissed a sandwich on a floor on the pickled fine sandwich with the pickle . 
 
 2.3
 Question 9:
@@ -615,20 +616,18 @@ For the sentence, there are two possible parsing having equal probability. There
 
 (c) In the corpus, the probabilities of the two sentence appearing are both 0.5. In the grammar model of language, the probability of producing the first sentence is 5.144e-05, and the probability of producing the second sentence is 1.240e-09. -log(P) of the two sentences are 14.2467 and 29.587, which sum up to 43.8337, which is just log prob in the equation. Dividing by word number (18) yields the cross entropy 2.435.
 
-(d) The perplexity is just exponentiating the cross entropy, which is e^2.435 = 11.4158
+(d) The perplexity is just exponentiating the cross entropy, which is 2^2.435 = 5.40764333
 
-(e) The cross entropy here is infinity: as the second setence have a VP with only a verb but not NP, it's not a sentence that can be produced using grammar.gr. The probability of producing that sentence with grammar model is 0, indicating that the log probability is negative infinity. When summing negative log probability, the result is also infinity and produce an infinite cross-entropy
+(e) The cross-entropy here is infinity: as the second sentence has a VP with only a verb but not NP, it's not a sentence that can be produced using grammar.gr. The probability of producing that sentence with the grammar model is 0, indicating that the log probability is negative infinity. When summing negative log probability, the result is also infinity and produces an infinite cross-entropy
 
 Question 6:
 (a) command used: python3 randset.py -n 200 -g grammar2.gr | ./parse -P -g grammar2.gr
-The entropy of grammar2 is 2.002 bits per words (4575.336 / 2285)
-(b) The entropy of grammar3 is 2.300 bits per words (6761.001 / 2940). Grammar3 has higher entropy than grammar2. This is natural as grammar3 is designed to incorporate more diverse sentence forms and incoporate more word types and choices. Generally, longer sentences can have lower probability (as the product of the partition is the sum of more probabilities at each step of choosing rules). For grammar3 it can have longer sentences due to variety in gramamr rules and sentence forms. All these factors contribute to higher entropy for grammar3 than grammar2.
-(c) The resulting entropy is infinity. Obsevations shows that some sentence in the generating process has ... with default max expansion settings (450). We have tried increasing that threshold to 1000, while still having ... in produced sentence. Since the grammar.gr is designed in the way that allow excessively long sentences, the appearane of ... is unavoidable unless having arbitarily large max expansions. As ... is not part of the grammar, all sentence with that will have probability 0 in the model and thus have infinite log probabilities, making cross entropy also infinity.
+The entropy of grammar2 is 2.002 bits per word (4575.336 / 2285)
+(b) The entropy of grammar 3 is 2.300 bits per word (6761.001 / 2940). Grammar 3 has higher entropy than grammar 2. This is natural as grammar3 is designed to incorporate more diverse sentence forms and incorporate more word types and choices. Generally, longer sentences can have a lower probability (as the product of the partition is the sum of more probabilities at each step of choosing rules). For grammar3 it can have longer sentences due to variety in grammar rules and sentence forms. All these factors contribute to higher entropy for grammar3 than grammar2.
+(c) The resulting entropy is infinity. Observation shows that some sentence in the generating process has ... with default max expansion settings (450). We have tried increasing that threshold to 1000, while still having ... in produced sentence. Since the grammar.gr is designed in a way that allows excessively long sentences, the appearance of ... is unavoidable unless having arbitrarily large max expansions. As ... is not part of the grammar, all sentences with that will have probability 0 in the model and thus have infinite log probabilities, making cross entropy also infinity.
 
 Question 7
-We generate a new corpus for this problem. The entropy of grammar 2 on this corpus is 2.062 (4706.601 / 2282). 
-The cross entropy for grammar3 is 2.590. As the sentence that can be produced by grammar2 is a subset of possible sentences for grammar3, the probability of each sentences with grammar2 is higher than the probability of each sentences with grammar3 (the probability of each parse is lower for grammar3, as for each symbol there are more rules to choose). As the probability of the sentence appearing in the corpus remain constant, when negative log probability increase (when probability decrease), the sum of log probability increased, making cross entropy of grammar3 larger than grammar2's entropy
+We generate a new corpus for this problem. The entropy of grammar2 on this corpus is 2.062 (4706.601 / 2282). 
+The cross-entropy for grammar3 is 2.590. As the sentence that can be produced by grammar2 is a subset of possible sentences for grammar3, the probability of each sentence with grammar2 is higher than the probability of each sentence with grammar3 (the probability of each parse is lower for grammar3, as for each symbol there are more rules to choose). As the probability of the sentence appearing in the corpus remains constant when negative log probability increases (when probability decreases), the sum of log probability increases, making the cross-entropy of grammar3 larger than grammar2's entropy and the cross entropy for grammar is 2.205. For grammar, it has a higher probability of producing long sentences than grammar2. For corpus generated by grammar2, they are likely to be shorter sentences. The probability of producing these sentences with grammar is lower than the probability of producing these sentences with grammar2. Similarly, the total log probability for grammar is higher the the cross entropy of grammar is larger than the entropy of grammar2 and the cross entropy for grammaar is 2.205. For grammar, it has higher probability of producing long sentences than grammar2. For corpus generated by grammar2, they are likely to be shorter sentences. The probability of producing thsoe sentences with grammar is lower than the probability of producing thsoe sentences with grammar2. In a similar way, the total log probability for grammar is higher the the cross entropy of grammar is larger than the entropy of grammar2
 
- and the cross entropy for grammaar is 2.205. For grammar, it has higher probability of producing long sentences than grammar2. For corpus generated by grammar2, they are likely to be shorter sentences. The probability of producing thsoe sentences with grammar is lower than the probability of producing thsoe sentences with grammar2. In a similar way, the total log probability for grammar is higher the the cross entropy of grammar is larger than the entropy of grammar2
-
- 4.1
+4.1 
