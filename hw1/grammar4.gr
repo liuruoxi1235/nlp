@@ -41,14 +41,13 @@
 1   S   SS AV NP
 1   S   Wh AUV Whs
 1   S   Wh AUV Whs that NP Verb
-1   S   Wh AUV Whs Prep
+1   S   Wh AUV Whs NP Prep
 1   S   Wh Verb NP
 1   SS  that NP VP
 1	VP	Verb NP
 1   VP  IVP #3
 1   IVP Intrans
 1   IVP Intrans PP
-1   Whs NP WHVerb NP
 1   Whs NP WHVerb
 1   Whs NP Verb NP
 1	NP	Det_Phrase
