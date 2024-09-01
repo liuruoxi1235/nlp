@@ -31,16 +31,26 @@
 #    Det = determiner (sometimes called "article")
 #    Prep = preposition
 #    Adj = adjective
+#   Wh = interrogative words
+#   AUV = auxiliary verbs
+#   WHVerb = verb used in Wh questions
 
 1	S	NP VP
 1   S   NP Verb_sentence SS
 1   S   it AV NP SS
 1   S   SS AV NP
+1   S   Wh AUV Whs
+1   S   Wh AUV Whs that NP Verb
+1   S   Wh AUV Whs Prep
+1   S   Wh Verb NP
 1   SS  that NP VP
 1	VP	Verb NP
 1   VP  IVP #3
 1   IVP Intrans
 1   IVP Intrans PP
+1   Whs NP WHVerb NP
+1   Whs NP WHVerb
+1   Whs NP Verb NP
 1	NP	Det_Phrase
 0.2 NP  Name
 0.2	NP	NP PP
@@ -76,6 +86,13 @@
 1	Verb	kissed
 1	Verb	understood
 1	Verb	pickled
+
+1   WHVerb  think
+1   WHVerb  eat
+1   Wh what
+1   Wh who
+1   Wh where
+1   AUV did
 
 1   Verb_sentence    thought
 
