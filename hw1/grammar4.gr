@@ -21,6 +21,7 @@
 
 70	ROOT	S .
 5	ROOT	S !
+5 ROOT  Q ?
 0.5	ROOT	is it true that S ?     # mixing terminals and nonterminals is ok.
 
 # The basic grammar rules.  Here's what the abbreviations stand for:
@@ -39,10 +40,10 @@
 1   S   NP Verb_sentence SS
 1   S   it AV NP SS
 1   S   SS AV NP
-1   S   Wh AUV Whs
-1   S   Wh AUV Whs that NP Verb
-1   S   Wh AUV Whs NP Prep
-1   S   Wh Verb NP
+1   Q   Wh AUV Whs
+1   Q   Wh AUV Whs that NP Verb
+1   Q   Wh AUV Whs NP Prep
+1   Q   Wh Verb NP
 1   SS  that NP VP
 1	VP	Verb NP
 1   VP  IVP #3
