@@ -21,11 +21,12 @@
 
 70	ROOT	S .
 5	ROOT	S !
-5 ROOT  Q ?
+5 ROOT  Q ?             # a question must be ended with "?"
 0.5	ROOT	is it true that S ?     # mixing terminals and nonterminals is ok.
 
 # The basic grammar rules.  Here's what the abbreviations stand for:
 #    S  = sentence
+#    Q  = question
 #    NP = noun phrase
 #    VP = verb phrase
 #    PP = prepositional phrase
@@ -33,8 +34,8 @@
 #    Prep = preposition
 #    Adj = adjective
 #   Wh = interrogative words
-#   AUV = auxiliary verbs
-#   WHVerb = verb used in Wh questions
+#   AUV = auxiliary verbs (did)
+#   WHVerb = verbs in correct forms that are used in Wh questions after auxiliary verbs 
 
 1	S	NP VP
 1   S   NP Verb_sentence SS
