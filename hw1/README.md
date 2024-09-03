@@ -679,3 +679,23 @@ For adding adverb before a adjective that should proceed with an, we need to be 
 1	NP	Det_Phrase(modified from 1 NP Det Noun)
 
 We change the original Det Noun combination to a Det_Phrase to handle all the phrase start by article. For normal article, they can have any noun afterward. a can only get followed by A_Noun_P, An can only get followed by An_Noun_P.  
+
+(d) We add the following rules:
+The clarification of each letter/phrases is explained below.
+#   Q  = question
+#   Wh = interrogative words
+#   AUV = auxiliary verbs (did)
+#   WHVerb = verbs in correct forms that are used in Wh questions after auxiliary verbs 
+5 ROOT  Q 
+
+1   Q   Wh AUV Whs
+1   Q   Wh AUV Whs that NP Verb
+1   Q   Wh AUV Whs NP Prep
+1   Q   Wh Verb NP
+
+1   WHVerb  think
+1   WHVerb  eat
+1   Wh what
+1   Wh who
+1   Wh where
+1   AUV did
