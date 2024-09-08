@@ -656,7 +656,7 @@ We categorize a/an as a separate type apart from other articles. As a/an can pos
 0.5   A_Noun_P Adj_a Noun_P
 
 1   An_Noun_P Noun_an
-0.5   An_Noun_P Adj_an_P An_Noun_P
+0.5   An_Noun_P Adj_an_P Noun_P
 
 The NP that should be proceed by a and an should have a separate type. We name them as A_Noun_P and An_Noun_P. For A_Noun_P, it can be either formed with a single a-noun, or a a-adjective and any noun. To make it more conveinent, we use a type Noun_P to refer to the combination of A_Noun_P and An_Noun_P. As we do not want excessively long consecutive adjectives, we reduce the weight for the resurive one.
 
