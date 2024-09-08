@@ -685,19 +685,21 @@ The clarification of each letter/phrases is explained below.
 
 Q  = question
 AUV = auxiliary verbs (did)
-Wh = interrogative words
-Whd = Wh that should be followed by AUV
-Whu = Wh that can be followed by both AUV and Verb
 WHVerb = verbs in correct forms that are used in Wh questions after auxiliary verbs 
 5 ROOT  Q 
 
-1   Q   Wh AUV Whs
-1   Q   Wh AUV Whs that NP Verb
-1   Q   Wh AUV Whs NP Prep
-1   Q   Whu Verb NP         # only Whu can be followed by verb
+We only consider the Who, Where, and What. 
+4   Q   who VP 
+1   Q   who AUV NP WHVerb NP with
+5   Q   where AUV NP WHVerb NP # "where did" need to be followed by a complete sentence.
+2   Q   what AUV NP WHVerb
+1   Q   what AUV NP WHVerb_sent
+1   Q   what AUV NP WHVerb NP Prep
+1   Q   what AUV NP WHVerb_sent that NP Trans-verb
 
-1   WHVerb  think
+1   WHVerb  see
 1   WHVerb  eat
+1   WHVerb_sent think
 1   Wh  Whu
 1   Wh  Whd
 1   Whu what
@@ -705,15 +707,8 @@ WHVerb = verbs in correct forms that are used in Wh questions after auxiliary ve
 1   Whd where
 1   AUV did
 
-Note that the given WH-word questions generally have the following forms: 
-
+The WH words questions have somthing in-common:
 They all ends with "?"; Thus, it is crucial to distinguish them with regular sentences which may ends with others such as "." or "!".
 
-Wh-word + did + NP + WHVerb (not past tense) + ?
-Wh-word + did + NP + WHVerb + that + NP + Verb ?
-Wh-word + did + NP + WHVerb + NP + Prep + ?
-Wh-word + Vern + NP + ?
-Wh-word + did + NP + WHVerb + NP + ?
-
 Besides, for questions that starts with Wh-words, it is quite easy to distinguish them from other sentences since after the root, it follows Q, but not S.
-Thus, we can easily avoid conflicts occur in some sentences. The grammatical pattern of suborninate clause in Wh-word sentecnes, or questions, are quite different from the usual sentences. Thus, we decide to split the common sentence construction with the question constrcution. Ex. the parser cannot parse Sally ate, but it indeed occurs after "that" (what did the president think that Sally ate ?). Note that some Wh-word such as where cannot be followed directly by verb without did or it incurs grammar mistakes. Thus, we also modified it to only followed by AUVs (did). 
+Thus, we can easily avoid conflicts occur in some sentences. The grammatical pattern of suborninate clause in Wh-word sentecnes, or questions, are quite different from the usual sentences. Thus, we decide to split the common sentence construction with the question constrcution. Ex. the parser cannot parse Sally ate, but it indeed occurs after "that" (what did the president think that Sally ate ?). Note that some Wh-word such as where cannot be followed directly by verb without did or it incurs grammar mistakes. Thus, we also modified it to only followed by AUVs (did). We also split the discussion for the three possible WH-words in three branches. Note that "think" is quite special since it should be followed by a sentence. Thus, we also split the discussion for think and other verbs. We also additionally add the second rule for "who" which does not appear in the examples given in the document. 
