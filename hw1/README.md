@@ -679,3 +679,34 @@ For adding adverb before a adjective that should proceed with an, we need to be 
 1	NP	Det_Phrase(modified from 1 NP Det Noun)
 
 We change the original Det Noun combination to a Det_Phrase to handle all the phrase start by article. For normal article, they can have any noun afterward. a can only get followed by A_Noun_P, An can only get followed by An_Noun_P.  
+
+(d) We add the following rules:
+The clarification of each letter/phrases is explained below.
+Q  = question
+Wh = interrogative words
+AUV = auxiliary verbs (did)
+WHVerb = verbs in correct forms that are used in Wh questions after auxiliary verbs 
+5 ROOT  Q 
+
+1   Q   Wh AUV Whs
+1   Q   Wh AUV Whs that NP Verb
+1   Q   Wh AUV Whs NP Prep
+1   Q   Wh Verb NP
+
+1   WHVerb  think
+1   WHVerb  eat
+1   Wh what
+1   Wh who
+1   Wh where
+1   AUV did
+
+Note that the given WH-word questions generally have the following forms: 
+They all ends with "?"; Thus, it is crucial to distinguish them with regular sentences which may ends with others such as "." or "!".
+Wh-word + did + NP + WHVerb (not past tense) + ?
+Wh-word + did + NP + WHVerb + that + NP + Verb ?
+Wh-word + did + NP + WHVerb + NP + Prep + ?
+Wh-word + Vern + NP + ?
+Wh-word + did + NP + WHVerb + NP + ?
+
+Besides, for questions that starts with Wh-words, it is quite easy to distinguish them from other sentences since after the root, it follows Q, but not S.
+Thus, we can easily avoid conflicts occur in some sentences. The grammatical pattern of suborninate clause in Wh-word sentecnes, or questions, are quite different from the usual sentences. Thus, we decide to split the common sentence construction with the question constrcution. Ex. the parser cannot parse Sally ate, but it indeed occurs after "that" (what did the president think that Sally ate ?).
