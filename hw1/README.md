@@ -681,7 +681,7 @@ For adding adverb before a adjective that should proceed with an, we need to be 
 We change the original Det Noun combination to a Det_Phrase to handle all the phrase start by article. For normal article, they can have any noun afterward. a can only get followed by A_Noun_P, An can only get followed by An_Noun_P.  
 
 (d) We add the following rules:
-The clarification of each letter/phrases is explained below.
+The clarification of each letter/phrase is explained below.
 
 Q  = question
 AUV = auxiliary verbs (did)
@@ -707,8 +707,24 @@ We only consider the Who, Where, and What.
 1   Whd where
 1   AUV did
 
-The WH words questions have somthing in-common:
-They all ends with "?"; Thus, it is crucial to distinguish them with regular sentences which may ends with others such as "." or "!".
+The WH words questions have something in common:
+They all end with "?"; Thus, it is crucial to distinguish them from regular sentences which may end with others such as "." or "!".
 
-Besides, for questions that starts with Wh-words, it is quite easy to distinguish them from other sentences since after the root, it follows Q, but not S.
-Thus, we can easily avoid conflicts occur in some sentences. The grammatical pattern of suborninate clause in Wh-word sentecnes, or questions, are quite different from the usual sentences. Thus, we decide to split the common sentence construction with the question constrcution. Ex. the parser cannot parse Sally ate, but it indeed occurs after "that" (what did the president think that Sally ate ?). Note that some Wh-word such as where cannot be followed directly by verb without did or it incurs grammar mistakes. Thus, we also modified it to only followed by AUVs (did). We also split the discussion for the three possible WH-words in three branches. Note that "think" is quite special since it should be followed by a sentence. Thus, we also split the discussion for think and other verbs. We also additionally add the second rule for "who" which does not appear in the examples given in the document. 
+Besides, for questions that start with Wh-words, it is quite easy to distinguish them from other sentences since after the root, it follows Q, but not S.
+Thus, we can easily avoid conflicts that occur in some sentences. The grammatical pattern of subordinate clauses in Wh-word sentences, or questions, is quite different from the usual sentences. Thus, we decide to split the common sentence construction with the question construction. Ex. the parser cannot parse "Sally ate", but it indeed occurs after "that" (what did the president think that Sally ate ?). Note that some Wh-word such as where cannot be followed directly by a verb without did or it incurs grammar mistakes. Thus, we also modified it to only followed by AUVs (did). We also split the discussion for the three possible WH-words into three branches. Note that "think" is quite special since it should be followed by a sentence. Thus, we also split the discussion into think and other verbs. We also additionally add the second rule for "who" which does not appear in the examples given in the document. 
+
+
+Extra credit:
+For this part, we implemented object clauses -- sentences in the middle of another sentence. Here are some instance:
+
+Sally , who worked , worked . 
+the sandwich , which understood a floor , thought that the desk sighed . 
+Sally thought that the chief of staff , which worked , pickled a proposal , which wanted the pickle . 
+Sally sighed on a pickle , where the very delicious pickled fine proposal sighed . 
+the desk , which wanted and ate every fine sandwich , thought that every sandwich pickled the pickle . 
+
+The main difficulty is that we need to add two commas to enclose the clause if the clause is not at the end of the sentence,
+but does add only one comma at the beginning of the clause if the end of the clause is the end of the sentence, where a period is 
+already provided. To achieve this, we distinguished between normal claudes and claudes at the end of the sentence. Also, where-clauses
+are different from who-clauses and which-clauses in that it should be followed by a complete sentence, while the other two should be
+followed by a verb phrase (either an intransitive verb or a transitive verb with an object), so we address these cases differently.
