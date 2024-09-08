@@ -33,8 +33,10 @@
 #    Det = determiner (sometimes called "article")
 #    Prep = preposition
 #    Adj = adjective
-#   Wh = interrogative words
 #   AUV = auxiliary verbs (did)
+#   Wh = interrogative words
+#   Whd = Wh that should be followed by AUV
+#   Whu = Wh that can be followed by both AUV and Verb
 #   WHVerb = verbs in correct forms that are used in Wh questions after auxiliary verbs 
 
 1	S	NP VP
@@ -44,7 +46,7 @@
 1   Q   Wh AUV Whs
 1   Q   Wh AUV Whs that NP Verb
 1   Q   Wh AUV Whs NP Prep
-1   Q   Wh Verb NP
+1   Q   Whu Verb NP
 1   SS  that NP VP
 1	VP	Verb NP
 1   VP  IVP #3
@@ -87,9 +89,11 @@
 
 1   WHVerb  think
 1   WHVerb  eat
-1   Wh what
-1   Wh who
-1   Wh where
+1   Wh  Whu
+1   Wh  Whd
+1   Whu what
+1   Whu who
+1   Whd where
 1   AUV did
 
 1   Verb_sentence    thought

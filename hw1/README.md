@@ -682,26 +682,33 @@ We change the original Det Noun combination to a Det_Phrase to handle all the ph
 
 (d) We add the following rules:
 The clarification of each letter/phrases is explained below.
+
 Q  = question
-Wh = interrogative words
 AUV = auxiliary verbs (did)
+Wh = interrogative words
+Whd = Wh that should be followed by AUV
+Whu = Wh that can be followed by both AUV and Verb
 WHVerb = verbs in correct forms that are used in Wh questions after auxiliary verbs 
 5 ROOT  Q 
 
 1   Q   Wh AUV Whs
 1   Q   Wh AUV Whs that NP Verb
 1   Q   Wh AUV Whs NP Prep
-1   Q   Wh Verb NP
+1   Q   Whu Verb NP         # only Whu can be followed by verb
 
 1   WHVerb  think
 1   WHVerb  eat
-1   Wh what
-1   Wh who
-1   Wh where
+1   Wh  Whu
+1   Wh  Whd
+1   Whu what
+1   Whu who
+1   Whd where
 1   AUV did
 
 Note that the given WH-word questions generally have the following forms: 
+
 They all ends with "?"; Thus, it is crucial to distinguish them with regular sentences which may ends with others such as "." or "!".
+
 Wh-word + did + NP + WHVerb (not past tense) + ?
 Wh-word + did + NP + WHVerb + that + NP + Verb ?
 Wh-word + did + NP + WHVerb + NP + Prep + ?
