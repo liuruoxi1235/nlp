@@ -92,7 +92,7 @@ class Grammar:
             self
         """
         # Parse the input grammar file
-        self.rules = None
+        self.rules = {}
         self._load_rules_from_file(grammar_file)
 
     def _load_rules_from_file(self, grammar_file):
@@ -102,30 +102,38 @@ class Grammar:
         Args:
             grammar_file (str): Path to the raw grammar file 
         """
-        self.rules = {}
-        with open(grammar_file, "r") as file:
-            for line in file:
-                if not line.strip():
-                    continue
-                if line[0] == "#":
-                    continue
-                substrings = line.strip().split()
-                if substrings[1] not in self.rules.keys():
-                    self.rules[substrings[1]] = {"weights": [float(substrings[0])], "rules": []}
-                else:
-                    self.rules[substrings[1]]["weights"].append(float(substrings[0]))
-                temp_list = []
-                for substring in substrings[2:]:
-                    if "#" in substring:
-                        break
-                    temp_list.append(substring)
-                self.rules[substrings[1]]["rules"].append(temp_list)
-        for rule in self.rules.keys():
-            total = 0
-            for weight in self.rules[rule]["weights"]:
-                total += weight
-            self.rules[rule]["total_weight"] = total
 
+        with open(grammar_file, 'r') as file:
+            for line in file:
+
+                #Eliminate excessive whitespace
+                line = line.strip()
+
+                #Exclude comment lines or blank lines
+                if line and not line.startswith('#'):
+
+                    #Read the relative odds(int), LHS(str), RHS(list of str)
+                    content = line.split('\t')
+                    rel_odd = int(content[0])
+                    lhs = content[1]
+                    rhs = content[2].split() if len(content) > 2 else [] #allow empty rhs
+
+                    #Check for illegal characters before inserting into rules
+                    if any(char in '#()' for char in lhs):
+                        continue
+
+                    valid_rhs = []
+                    for element in rhs:
+                        if any(char in '#()' for char in element):
+                            break
+                        valid_rhs.append(element)
+                
+                    #Create a new entry in rules if lhs is not yet presented in rules
+                    if lhs not in self.rules:
+                        self.rules[lhs] = []
+                
+                    #Add the rhs & relative odds to the corresponding lhs entry
+                    self.rules[lhs].append((rel_odd, valid_rhs)) 
 
 
     def sample(self, derivation_tree, max_expansions, start_symbol):
@@ -144,32 +152,44 @@ class Grammar:
         Returns:
             str: the random sentence or its derivation tree
         """
-        ans = ""
-        total_expansion = 0
-        def expand(current_expansion, max_expansions, start_symbol):
-            nonlocal ans, total_expansion
-            if current_expansion > max_expansions:
-                ans += "..."
-                ans += " "
-                return
-            if start_symbol not in self.rules.keys():
-                ans += start_symbol
-                ans += " "
-                return
-            if derivation_tree:
-                ans += "("
-                ans += start_symbol
-                ans += " "
-            total_expansion += 1
-            expand_rule = random.choices(self.rules[start_symbol]["rules"], weights=self.rules[start_symbol]["weights"])
-            for element in expand_rule[0]:
-                expand(total_expansion, max_expansions, element)
-            if derivation_tree:
-                ans += ")"
-                
+
+        #initialize a sentence with ROOT
+        start_sent = [start_symbol]
+        expansions_left = max_expansions - 1 #since 'ROOT' is also a non-terminal
+        def expand(sent, expansions_left):
+
+            #recursion endpoints
+            if not any(symbol in self.rules for symbol in sent):
+                return sent
+
+            #locate the first symbol to expand. this will yield depth-first expansion
+            expand_idx = 0
+            while sent[expand_idx] not in self.rules:
+                expand_idx += 1
+
+            #randomly select an expansion rule based on odds
+            expand_rule = random.choices(self.rules[sent[expand_idx]], weights=[odd for (odd, rhs) in self.rules[sent[expand_idx]]])
+            [(_, rhs)] = expand_rule
+
+            #if running out of expansions, prevent future non-terminals
+            if expansions_left <= 0:
+                rhs = ['...' if symbol in self.rules else symbol for symbol in rhs]
+
+            #replace non-terminal with new symbols
+            sent = sent[:expand_idx] + rhs + sent[expand_idx+1:]
+            print(sent)
             
-        expand(0, max_expansions, start_symbol)
-        return ans
+            #update expansion counts
+            non_terminal_count = sum(1 for symbol in rhs if symbol in self.rules)
+            expansions_left -= non_terminal_count
+
+            return expand(sent, expansions_left)
+
+        return " ".join(expand(start_sent, expansions_left))
+
+
+        raise NotImplementedError
+
 
 ####################
 ### Main Program
