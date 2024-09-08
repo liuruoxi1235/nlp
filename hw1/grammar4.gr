@@ -61,18 +61,21 @@ ROOT  Q ?             # a question must be ended with "?"
 1   IVP Intrans-verb
 1   IVP Intrans-verb PP
 
-# 6. Question sentence structures
-1   Q   Wh AUV Whs
-1   Q   Wh AUV Whs that NP Verb
-1   Q   Wh AUV Whs NP Prep
-1   Q   Whu Verb NP
-1   Whs NP WHVerb
-1   Whs NP Verb NP
+# 6. Question sentence structures. Overall equal equality for who, where, or what. 
+4   Q   who VP 
+1   Q   who AUV NP WHVerb NP with
+
+5   Q   where AUV NP WHVerb NP # "where did" need to be followed by a complete sentence.
+
+2   Q   what AUV NP WHVerb
+1   Q   what AUV NP WHVerb_sent
+1   Q   what AUV NP WHVerb NP Prep
+1   Q   what AUV NP WHVerb_sent that NP Trans-verb
 
 # 6. Noun phrases and Preposition phrases. All nouns except names have determiners before them. 
 # We also allow NPs concatenated with Con (like "and"). 
-1	NP	Det_Phrase
-0.2 NP  Name
+4	NP	Det_Phrase
+2 NP  Name
 0.2	NP	NP PP
 0.1 NP  NP Con NP
 1	PP	Prep NP
@@ -98,7 +101,7 @@ ROOT  Q ?             # a question must be ended with "?"
 # that a preterminal is a special kind of nonterminal.
 
 # Verbs
-1   Trans-verb    Trans-verb  Con  Trans-verb
+0.3   Trans-verb    Trans-verb  Con  Trans-verb
 1	Trans-verb	ate
 1	Trans-verb	wanted
 1	Trans-verb	kissed
@@ -109,8 +112,9 @@ ROOT  Q ?             # a question must be ended with "?"
 1   Intrans-verb worked
 
 # Question sentence vocabulary
-1   WHVerb  think
+1   WHVerb  see
 1   WHVerb  eat
+1   WHVerb_sent think
 1   Wh  Whu
 1   Wh  Whd
 1   Whu what
