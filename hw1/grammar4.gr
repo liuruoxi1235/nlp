@@ -35,7 +35,7 @@
 # 1. Rules for creating full sentences.
 70	ROOT	S .
 5	ROOT	S !
-5 ROOT  Q ?             # a question must be ended with "?"
+ROOT  Q ?             # a question must be ended with "?"
 0.5	ROOT	is it true that S ?     # mixing terminals and nonterminals is ok.
 
 # 2. The basic sentence structure
