@@ -15,15 +15,7 @@
 #      the difference between terminal and nonterminal symbols?  If
 #      there is at least one rule for rewriting a symbol, then that
 #      symbol is a nonterminal and should be rewritten.
-#######################
-
-# Rules for creating full sentences.
-
-70	ROOT	S .
-5	ROOT	S !
-5 ROOT  Q ?             # a question must be ended with "?"
-0.5	ROOT	is it true that S ?     # mixing terminals and nonterminals is ok.
-
+#
 # The basic grammar rules.  Here's what the abbreviations stand for:
 #    S  = sentence
 #    Q  = question
@@ -33,25 +25,52 @@
 #    Det = determiner (sometimes called "article")
 #    Prep = preposition
 #    Adj = adjective
-#   Wh = interrogative words
 #   AUV = auxiliary verbs (did)
+#   Wh = interrogative words
+#   Whd = Wh that should be followed by AUV
+#   Whu = Wh that can be followed by both AUV and Verb
 #   WHVerb = verbs in correct forms that are used in Wh questions after auxiliary verbs 
+#######################
 
+# 1. Rules for creating full sentences.
+70	ROOT	S .
+5	ROOT	S !
+5 ROOT  Q ?             # a question must be ended with "?"
+0.5	ROOT	is it true that S ?     # mixing terminals and nonterminals is ok.
+
+# 2. The basic sentence structure
 1	S	NP VP
+
+# 3. Three sentence structures that uses sub-sentences. Note that the first rules uses 
+# Verb_sentence (such as "thought") while the latter two uses CV (such as "perplexed").
+# This is a necessary distinction of verbs, since it is "obviously not okay" to say "it 
+# saw the president that ... " or " the president slept that ... ".
 1   S   NP Verb_sentence SS
-1   S   it AV NP SS
-1   S   SS AV NP
+1   S   it CV NP SS
+1   S   SS CV NP
+
+
+# 4. Definition of "that" started sub-sentences
+1   SS  that NP VP
+
+# 5. Verb phrase. It can be either transitibe verb phrase or intransitive verb phrase.
+# Each transitive verb phrase contains a Trans-verb and a noun phrase; each intransitive
+# verb phrase contains either an Intrans-verb only or an Intrans-verb followed by a preposition phrase.
+1	VP	Trans-verb NP
+1   VP  IVP #3
+1   IVP Intrans-verb
+1   IVP Intrans-verb PP
+
+# 6. Question sentence structures
 1   Q   Wh AUV Whs
 1   Q   Wh AUV Whs that NP Verb
 1   Q   Wh AUV Whs NP Prep
-1   Q   Wh Verb NP
-1   SS  that NP VP
-1	VP	Verb NP
-1   VP  IVP #3
-1   IVP Intrans
-1   IVP Intrans PP
+1   Q   Whu Verb NP
 1   Whs NP WHVerb
 1   Whs NP Verb NP
+
+# 6. Noun phrases and Preposition phrases. All nouns except names have determiners before them. 
+# We also allow NPs concatenated with Con (like "and"). 
 1	NP	Det_Phrase
 0.2 NP  Name
 0.2	NP	NP PP
@@ -78,39 +97,32 @@
 # terminals, like "chief of staff") is called a "preterminal."  Notice 
 # that a preterminal is a special kind of nonterminal.
 
-1   Verb    Verb  Con  Verb
-1	Verb	ate
-1	Verb	wanted
-1	Verb	kissed
-1	Verb	understood
-1	Verb	pickled
+# Verbs
+1   Trans-verb    Trans-verb  Con  Trans-verb
+1	Trans-verb	ate
+1	Trans-verb	wanted
+1	Trans-verb	kissed
+1	Trans-verb	understood
+1	Trans-verb	pickled
+1   Trnas-verb  Con  Trans-verb Con
+1   Intrans-verb sighed
+1   Intrans-verb worked
 
+# Question sentence vocabulary
 1   WHVerb  think
 1   WHVerb  eat
-1   Wh what
-1   Wh who
-1   Wh where
+1   Wh  Whu
+1   Wh  Whd
+1   Whu what
+1   Whu who
+1   Whd where
 1   AUV did
 
+# Special Verbs suitable for sub-sentences
 1   Verb_sentence    thought
+1   CV  perplexed
 
-1   Intrans sighed
-1   Intrans worked
-
-1   AV perplexed
-
-1   Adv very
-
-5	Det	the
-1	Det	every
-
-1   A   a 
-1   An  an
-
-1   Name    Sally
-
-1   Con     and
-
+# Nouns
 1	Noun_a	president
 1	Noun_a	sandwich
 1	Noun_a	pickle
@@ -118,12 +130,25 @@
 1	Noun_a	floor
 1   Noun_a    proposal
 1   Noun_a    desk
-
 1   Noun_an apple
 1   Noun_an orange
 
-1  Adv very
+# Address names separately as they don't require determiners
+1   Name    Sally
 
+# Adverbs
+1   Adv very
+
+# Determiners 
+5	Det	the
+1	Det	every
+1   A   a 
+1   An  an
+
+# Conjunctives
+1   Con     and
+
+# Adjectives
 1  Adj Adj_a
 1  Adj Adj_an
 
@@ -137,6 +162,7 @@
 1   Adj_an ambivalent
 1   Adj_an excellent
 
+# Prepositions
 1	Prep	with
 1	Prep	on
 0.2	Prep	under
