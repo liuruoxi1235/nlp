@@ -700,18 +700,19 @@ We only consider the Who, Where, and What.
 1   WHVerb  see
 1   WHVerb  eat
 1   WHVerb_sent think
-1   Wh  Whu
-1   Wh  Whd
-1   Whu what
-1   Whu who
-1   Whd where
 1   AUV did
 
 The WH words questions have something in common:
 They all end with "?"; Thus, it is crucial to distinguish them from regular sentences which may end with others such as "." or "!".
 
+ I wonder what the president thought .
+ I wonder what the president thought that Sally ate .
+ I wonder what Sally ate the sandwich with .
+ I wonder who ate the sandwich .
+ I wonder where Sally ate the sandwich 
+
 Besides, for questions that start with Wh-words, it is quite easy to distinguish them from other sentences since after the root, it follows Q, but not S.
-Thus, we can easily avoid conflicts that occur in some sentences. The grammatical pattern of subordinate clauses in Wh-word sentences, or questions, is quite different from the usual sentences. Thus, we decide to split the common sentence construction with the question construction. Ex. the parser cannot parse "Sally ate", but it indeed occurs after "that" (what did the president think that Sally ate ?). Note that some Wh-word such as where cannot be followed directly by a verb without did or it incurs grammar mistakes. Thus, we also modified it to only followed by AUVs (did). We also split the discussion for the three possible WH-words into three branches. Note that "think" is quite special since it should be followed by a sentence. Thus, we also split the discussion into think and other verbs. We also additionally add the second rule for "who" which does not appear in the examples given in the document. 
+Thus, we can easily avoid conflicts that occur in some sentences. The grammatical pattern of subordinate clauses in Wh-word sentences, or questions, is quite different from the usual sentences. Thus, we decide to split the common sentence construction with the question construction. Ex. the parser cannot parse "Sally ate", but it indeed occurs after "that" (what did the president think that Sally ate ?). Note that some Wh-word such as where cannot be followed directly by a verb without did or it incurs grammar mistakes. Thus, we also modified it to only followed by AUVs (did). We also split the discussion for the three possible WH-words into three branches. Note that "think" is quite special since it should be followed by a sentence. Thus, we also split the discussion into "think" and other verbs. We also additionally add the second rule for "who" which does not appear in the examples given in the document. The rules defined above are self-explanatory, strictly following the five conditions on the homework requirements, and one that is correct in grammar but does not belong to the categories of the five sentences provided was added. 
 
 
 Extra credit:
