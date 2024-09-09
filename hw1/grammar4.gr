@@ -26,9 +26,6 @@
 #    Prep = preposition
 #    Adj = adjective
 #   AUV = auxiliary verbs (did)
-#   Wh = interrogative words
-#   Whd = Wh that should be followed by AUV
-#   Whu = Wh that can be followed by both AUV and Verb
 #   WHVerb = verbs in correct forms that are used in Wh questions after auxiliary verbs 
 #######################
 
@@ -115,11 +112,6 @@
 1   WHVerb  see
 1   WHVerb  eat
 1   WHVerb_sent think
-1   Wh  Whu
-1   Wh  Whd
-1   Whu what
-1   Whu who
-1   Whd where
 1   AUV did
 
 # Special Verbs suitable for sub-sentences
