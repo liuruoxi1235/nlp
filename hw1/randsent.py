@@ -94,6 +94,7 @@ class Grammar:
         # Parse the input grammar file
         self.rules = None
         self._load_rules_from_file(grammar_file)
+        self.expansion = 0
 
     def _load_rules_from_file(self, grammar_file):
         """
@@ -144,32 +145,26 @@ class Grammar:
         Returns:
             str: the random sentence or its derivation tree
         """
-        ans = ""
-        total_expansion = 0
-        def expand(current_expansion, max_expansions, start_symbol):
-            nonlocal ans, total_expansion
-            if current_expansion > max_expansions:
-                ans += "..."
-                ans += " "
-                return
-            if start_symbol not in self.rules.keys():
-                ans += start_symbol
-                ans += " "
-                return
-            if derivation_tree:
-                ans += "("
-                ans += start_symbol
-                ans += " "
-            total_expansion += 1
+        def expand(max_expansions, start_symbol):
+            ans = ""
+            if self.expansion >= max_expansions:
+                return "... "
             expand_rule = random.choices(self.rules[start_symbol]["rules"], weights=self.rules[start_symbol]["weights"])
             for element in expand_rule[0]:
-                expand(total_expansion, max_expansions, element)
+                if element in self.rules.keys():
+                    self.expansion += 1
+                    ans += expand(max_expansions, element)
+                else:
+                    ans += element 
+                    ans += " "
             if derivation_tree:
-                ans += ")"
+                return f"({start_symbol} {ans})"
+            else:
+                return ans 
                 
             
-        expand(0, max_expansions, start_symbol)
-        return ans
+        sentence = expand(max_expansions, start_symbol)
+        return sentence
 
 ####################
 ### Main Program
@@ -197,6 +192,7 @@ def main():
             t = os.system(f"echo '{sentence}' | perl {prettyprint_path}")
         else:
             print(sentence)
+        grammar.expansion = 0
 
 
 if __name__ == "__main__":

@@ -1,0 +1,154 @@
+# Symbols in the grammar are case-sensitive.
+# 
+# This grammar uses a convention that
+#    - terminals are usually lowercase  (president)
+#    - preterminals are capitalized     (Noun)
+#    - other nonterminals are all-caps  (NP)
+# 
+# This convention just makes grammars more readable to humans.  Thus:
+#
+#    - When *you* are writing grammars in questions 3 and 6, you should 
+#      follow this convention unless you have a good reason not to.  
+#
+#    - But your *program* should still work with grammars that don't
+#      follow this convention.  So how can your program reliably tell
+#      the difference between terminal and nonterminal symbols?  If
+#      there is at least one rule for rewriting a symbol, then that
+#      symbol is a nonterminal and should be rewritten.
+#
+# Here's what the abbreviations in the rules stand for:
+#    S  = sentence
+#    SS = sub_sentence (using "that")
+#    NP = noun phrase
+#    VP = verb phrase
+#    PP = prepositional phrase
+#    CV = causative verbs # this is associated with sub-sentences, where the causal effect of a complete sentence is described
+#    Det = determiner (sometimes called "article")
+#    Prep = preposition
+#    Adj = adjective
+######################
+
+
+# 1. Rules for creating full sentences.
+70	ROOT	S .
+5	ROOT	S !
+0.5	ROOT	is it true that S ?     # mixing terminals and nonterminals is ok.
+
+# 2. The basic sentence structure
+10	S	complex_NP VP
+
+# 3. Three sentence structures that uses sub-sentences. Note that the first rules uses 
+# Verb_sentence (such as "thought") while the latter two uses CV (such as "perplexed").
+# This is a necessary distinction of verbs, since it is "obviously not okay" to say "it 
+# saw the president that ... " or " the president slept that ... ".
+1   S   complex_NP Verb_sentence SS 
+1   S   it CV complex_NP SS 
+1   S   SS CV complex_NP_end
+
+# 4. Definition of "that" started sub-sentences
+1   SS  that complex_NP VP
+
+# 5. Verb phrase. It can be either transitibe verb phrase or intransitive verb phrase.
+# Each transitive verb phrase contains a Trans-verb and a noun phrase; each intransitive
+# verb phrase contains either an Intrans-verb only or an Intrans-verb followed by a preposition phrase.
+1	VP	Trans-verb complex_NP_end
+1   VP  IVP #3
+1   IVP Intrans-verb
+1   IVP Intrans-verb complex_PP_end
+
+# 6. Noun phrases and Preposition phrases. All nouns except names have determiners before them. 
+# We also allow NPs concatenated with Con (like "and"). 
+1	NP	Det Noun
+0.2 NP  complex_Name #1
+0.2	NP	NP PP
+0.1 NP  NP Con NP #2
+1	PP	Prep NP
+3	Noun Adj Noun
+1   Adj Adv Adj
+
+
+
+# 7. special sentences using 'where', 'who', or 'which'. Since we don't want nasty sub-sentence in
+# sub-sentence case (eg. Sally, who ate Sally, who perplexed the pickle, ...), we defined complex_NP,
+# complex_PP, and complex_Name, which have the sub-sentence probability. In the rest of the grammar except
+# definitions of NP PP and Name (to avoid recursive refer of them), use complex definitions. Also, to 
+# avoid multiple commas and periods at the end, we should ideally distinguish between subjective and objective 
+# (objectives appear at the end). However, a simpler apporach is to define _end counterparts to sub-sentences, 
+# and refer to them instead when used as the last component of any grammar.
+1   S_who , who VP ,
+1   S_which , which VP , 
+1   S_where , NP VP , 
+1   S_who_end , who VP
+1   S_which_end , which VP
+1   S_where_end , NP VP
+
+0.2 complex_NP  Det Noun S_which
+0.2 complex_PP  Prep NP S_where
+0.2 complex_Name  Name S_who
+1 complex_NP NP 
+1 complex_PP PP
+1 complex_Name Name
+
+0.2 complex_NP_end  Det Noun S_which_end
+0.2 complex_PP_end  Prep NP S_where_end
+0.2 complex_Name_end  Name S_who_end
+1 complex_NP_end NP 
+1 complex_PP_end PP
+1 complex_Name_end Name
+
+
+
+
+# 8. Vocabulary.  Your program can see that "ate" is a terminal
+# symbol because there exists no rule for rewriting it.
+# Any symbol that can rewrite as a terminal (or a string of 
+# terminals, like "chief of staff") is called a "preterminal."  Notice 
+# that a preterminal is a special kind of nonterminal.
+
+# Verbs
+1   Trans-verb    Trans-verb  Con  Trans-verb #2
+1	Trans-verb	ate
+1	Trans-verb	wanted
+1	Trans-verb	kissed
+1	Trans-verb	understood
+1	Trans-verb	pickled
+1   Intrans-verb sighed
+1   Intrans-verb worked
+
+# Special Verbs suitable for sub-sentences
+1   Verb_sentence    thought
+1   CV  perplexed
+
+# Nouns
+1	Noun	president
+1	Noun	sandwich
+1	Noun	pickle
+1	Noun	chief of staff
+1	Noun	floor
+1   Noun    proposal
+1   Noun    desk
+
+# Address names separately as they don't require determiners
+1   Name    Sally
+# Adverbs
+1   Adv very
+
+# Determiners 
+5	Det the
+5	Det	a
+1	Det	every
+
+# Conjunctives
+1   Con     and 
+
+# Adjectives
+1	Adj	fine
+1	Adj	delicious
+1	Adj	perplexed
+1	Adj	pickled
+
+# Prepositions
+1	Prep	with
+1	Prep	on
+0.2	Prep	under
+1	Prep	in

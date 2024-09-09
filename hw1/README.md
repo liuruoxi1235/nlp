@@ -712,3 +712,15 @@ They all ends with "?"; Thus, it is crucial to distinguish them with regular sen
 
 Besides, for questions that starts with Wh-words, it is quite easy to distinguish them from other sentences since after the root, it follows Q, but not S.
 Thus, we can easily avoid conflicts occur in some sentences. The grammatical pattern of suborninate clause in Wh-word sentecnes, or questions, are quite different from the usual sentences. Thus, we decide to split the common sentence construction with the question constrcution. Ex. the parser cannot parse Sally ate, but it indeed occurs after "that" (what did the president think that Sally ate ?). Note that some Wh-word such as where cannot be followed directly by verb without did or it incurs grammar mistakes. Thus, we also modified it to only followed by AUVs (did). We also split the discussion for the three possible WH-words in three branches. Note that "think" is quite special since it should be followed by a sentence. Thus, we also split the discussion for think and other verbs. We also additionally add the second rule for "who" which does not appear in the examples given in the document. 
+
+
+(ROOT (S (NP (NP (Det every) 
+                 (Noun sandwich)) 
+             (PP (Prep with) 
+                 (NP (NP (Det a) 
+                         (Noun pickle))
+                     (PP (Prep on)
+                         (Noun floor)))))
+         (VP (Verb wanted)
+             (NP (Det a)
+                 (Noun president)))))
